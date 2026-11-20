@@ -1,0 +1,32 @@
+---
+import '../styles/global.css';
+import ContactFab from '../components/ContactFab.astro';
+import AgeGate from '../components/AgeGate.astro';
+const { title, description } = Astro.props;
+---
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <meta name="theme-color" content="#080808" />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:type" content="website" />
+  <link rel="icon" href={`${import.meta.env.BASE_URL}favicon.png`} type="image/png" sizes="256x256" />
+  <link rel="apple-touch-icon" href={`${import.meta.env.BASE_URL}favicon.png`} />
+  <script is:inline>document.documentElement.classList.add('js');</script>
+  <script type="application/ld+json" set:html={JSON.stringify({"@context":"https://schema.org","@type":"Organization","name":"SPACE PRODUCCIONES","description":description})} />
+</head>
+<body>
+  <a class="skip" href="#main">Saltar al contenido</a>
+  <div class="cursor" aria-hidden="true"></div>
+  <div class="cursor-dot" aria-hidden="true"></div>
+  <slot />
+  <ContactFab />
+  <AgeGate />
+  <script src="../scripts/main.ts"></script>
+</body>
+</html>

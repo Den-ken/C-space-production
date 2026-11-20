@@ -1,0 +1,25 @@
+<section class="section about" id="nosotros" aria-labelledby="about-h">
+  <p class="label mono" data-reveal>Canal 01 — Nosotros</p>
+  <h2 id="about-h" class="big" data-split>
+    Hacemos que lo digital se sienta <em>en directo.</em>
+  </h2>
+  <div class="grid">
+    <div class="ph a scene" data-tone="1" data-parallax="-40"><img src={`${import.meta.env.BASE_URL}projects/pod-host.jpg`} alt="Hombre sonriendo con auriculares frente a un micrófono" style="object-position: 38% 50%" loading="lazy" decoding="async" /><span class="tag-temp">Foto de stock</span></div>
+    <div class="ph b scene" data-tone="4" data-parallax="60"><img src={`${import.meta.env.BASE_URL}projects/pod-mic.jpg`} alt="Micrófono de estudio con auriculares frente a un monitor de edición de audio" style="object-position: 70% 50%" loading="lazy" decoding="async" /><span class="tag-temp">Foto de stock</span></div>
+    <div class="txt" data-reveal>
+      <p>SPACE PRODUCCIONES es una productora digital de entretenimiento. Hacemos podcasts, transmisiones en vivo y shows, y trabajamos con creadoras e influencers.</p>
+      <p>El acceso a nuestro contenido es solo para mayores de 18 años.</p>
+      <p class="mono gold">Podcasts · Directos · Creadores</p>
+    </div>
+  </div>
+</section>
+<style>
+  .big { font-size: clamp(2.6rem, 7.4vw, 8rem); max-width: 16ch; }
+  .big em { font-size: 1.05em; }
+  .grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: clamp(1rem, 2.4vw, 2rem); margin-top: clamp(2rem, 4vw, 3.5rem); align-items: start; }
+  .ph { aspect-ratio: 3/4; }
+  .a { grid-column: 1 / span 5; grid-row: 1 / span 2; }
+  .b { grid-column: 7 / span 6; grid-row: 2; aspect-ratio: 16/10; align-self: end; }
+  .txt { grid-column: 7 / span 5; grid-row: 1; display: grid; gap: 1.2rem; max-width: 34rem; color: var(--warm); opacity: .9; }
+  @media (max-width: 760px) { .a { grid-column: 1 / span 9; grid-row: auto; } .b { grid-column: 4 / -1; grid-row: auto; } .txt { grid-column: 1 / -1; grid-row: auto; order: -1; } }
+</style>

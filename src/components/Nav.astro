@@ -1,0 +1,42 @@
+---
+import Logo from './Logo.astro';
+---
+<header class="nav">
+  <a href="#top" class="logo" aria-label="SPACE Producciones, inicio"><Logo /></a>
+  <nav aria-label="Principal">
+    <button class="burger" aria-expanded="false" aria-controls="menu"><span class="mono">Menú</span></button>
+    <ul id="menu">
+      <li><a href="#nosotros"><span class="gold mono">01</span> Nosotros</a></li>
+      <li><a href="#servicios"><span class="gold mono">02</span> Servicios</a></li>
+      <li><a href="#creadores"><span class="gold mono">03</span> Creadores</a></li>
+      <li><a href="#contacto" class="cta">Contacto</a></li>
+    </ul>
+  </nav>
+</header>
+<style>
+  .nav { position: fixed; inset: 0 0 auto 0; z-index: 90; display: flex; justify-content: space-between; align-items: center; padding: 1.1rem var(--pad); transition: background .4s, padding .4s; }
+  .nav.solid { background: rgba(8,8,8,.86); backdrop-filter: blur(10px); padding-top: .7rem; padding-bottom: .7rem; border-bottom: 1px solid var(--line); }
+  .logo { display: block; line-height: 0; transition: transform .4s var(--ease); }
+  .logo { --lh: 3rem; }
+  .logo:hover { --lc2: var(--gold-lit); }
+  .nav.solid .logo { --lh: 2.5rem; }
+  ul { display: flex; gap: clamp(1.1rem, 2vw, 2rem); list-style: none; align-items: center; }
+  li a { font-family: var(--f-mono); font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; display: flex; gap: .5rem; position: relative; padding: .3rem 0; }
+  li a::after { content: ''; position: absolute; left: 0; bottom: 0; height: 1px; width: 100%; background: currentColor; transform: scaleX(0); transform-origin: left; transition: transform .4s var(--ease); }
+  li a:hover::after, li a:focus-visible::after, li a[aria-current='true']::after { transform: scaleX(1); }
+  li a[aria-current='true'] { color: var(--gold-lit); }
+  li a.cta[aria-current='true'] { background: var(--gold); border-color: var(--gold); color: var(--black); }
+  li a.cta[aria-current='true']::after { display: none; }
+  .cta { border: 1px solid currentColor; padding: .5rem 1rem; }
+  .burger { display: none; border: 1px solid var(--warm); padding: .45rem .9rem; color: var(--warm); }
+  @media (max-width: 1000px) {
+    .burger { display: block; }
+    ul { position: fixed; inset: 0; background: var(--black); flex-direction: column; justify-content: center; gap: 1.6rem; transform: translateY(-100%); transition: transform .6s var(--ease); z-index: -1; }
+    ul.open { transform: none; visibility: visible; }
+    ul { visibility: hidden; transition: transform .6s var(--ease), visibility 0s .6s; }
+    ul.open { transition: transform .6s var(--ease), visibility 0s; }
+    .nav.solid { backdrop-filter: none; background: rgba(8,8,8,.97); }
+    li a { font-size: 1.2rem; color: var(--warm); }
+    .burger { position: relative; z-index: 2; }
+  }
+</style>

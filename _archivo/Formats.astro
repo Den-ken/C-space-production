@@ -1,0 +1,78 @@
+---
+import { formats, categories } from '../data/site';
+---
+<section class="section port" id="formatos" aria-labelledby="port-h">
+  <div class="top">
+    <div>
+      <p class="label mono" data-reveal>Canal 03 — Formatos</p>
+      <h2 id="port-h" data-split>Formatos <em>en el aire</em></h2>
+    </div>
+    <p class="demo mono">Formatos de ejemplo · ilustran lo que podemos producir, no son programas reales</p>
+  </div>
+  <div class="filters" role="group" aria-label="Filtrar por tipo de formato">
+    <button class="on" data-filter="all" aria-pressed="true">Todos</button>
+    {categories.map((c) => <button data-filter={c} aria-pressed="false">{c}</button>)}
+  </div>
+  <div class="gal">
+    {formats.map((p, i) => (
+      <button class={`card ${p.size}`} data-cat={p.category} data-id={p.id} aria-label={`Ver formato: ${p.title}`}>
+        <div class="scene" data-tone={p.tone}>
+          {p.image && <img src={p.image} alt={p.title} style={p.pos ? `object-position:${p.pos}` : undefined} loading="lazy" />}
+          <span class="tag-temp">Formato de ejemplo</span>
+        </div>
+        <div class="cap"><span class="mono gold">{String(i + 1).padStart(2, '0')} — {p.category}</span><strong>{p.title}</strong></div>
+      </button>
+    ))}
+  </div>
+</section>
+
+<dialog class="viewer" aria-labelledby="v-title">
+  <div class="v-scene scene" data-tone="0"><span class="tag-temp">Formato de ejemplo · imagen temporal</span></div>
+  <div class="v-info">
+    <button class="close mono" aria-label="Cerrar formato">Cerrar ✕</button>
+    <p class="mono gold" id="v-cat"></p>
+    <h3 id="v-title"></h3>
+    <p id="v-blurb"></p>
+    <dl class="mono"><div><dt>Formato</dt><dd id="v-format"></dd></div><div><dt>Estado</dt><dd>Ejemplo</dd></div></dl>
+    <div class="nav2"><button class="mono" data-dir="-1">← Anterior</button><button class="mono" data-dir="1">Siguiente →</button></div>
+  </div>
+</dialog>
+<script type="application/json" id="formats-data" set:html={JSON.stringify(formats)} />
+
+<style>
+  .top { display: flex; justify-content: space-between; align-items: end; gap: 2rem; flex-wrap: wrap; margin-bottom: 2.5rem; }
+  .top h2 { font-size: clamp(2.4rem, 7.5vw, 8rem); }
+  .demo { color: var(--gold); max-width: 20rem; border-left: 1px solid var(--gold); padding-left: 1rem; line-height: 1.6; }
+  .filters { display: flex; flex-wrap: wrap; gap: .5rem 1.6rem; margin-bottom: 2.5rem; border-bottom: 1px solid var(--line); padding-bottom: 1rem; }
+  .filters button { font-family: var(--f-mono); font-size: .74rem; letter-spacing: .14em; text-transform: uppercase; opacity: .55; padding: .3rem 0; border-bottom: 1px solid transparent; transition: .3s; }
+  .filters button:hover { opacity: 1; }
+  .filters button.on { opacity: 1; color: var(--gold-lit); border-color: var(--gold-lit); }
+  .gal { display: grid; grid-template-columns: repeat(12, 1fr); gap: clamp(1.4rem, 3vw, 2.4rem) clamp(.8rem, 2vw, 1.6rem); }
+  .card { display: flex; flex-direction: column; text-align: left; }
+  .card .scene { flex: 1; min-height: var(--mh, 24vw); }
+  .card:hover .scene::before, .card:focus-visible .scene::before { transform: scale(1.12) rotate(1.5deg); }
+  .card .cap { display: flex; flex-direction: column; gap: .2rem; padding-top: .8rem; }
+  .card strong { font-family: var(--f-display); font-weight: 400; font-size: clamp(1.3rem, 2.4vw, 2rem); text-transform: uppercase; transition: color .3s, transform .4s var(--ease); }
+  .card:hover strong { color: var(--gold-lit); transform: translateX(8px); }
+  .card.xl { grid-column: span 7; --r: 16/10; --mh: 34vw; }
+  .card.tall { grid-column: span 5; --r: 4/5; --mh: 36vw; }
+  .card.sq { grid-column: span 5; --r: 1/1; --mh: 30vw; }
+  .card.wide { grid-column: span 7; --r: 21/9; --mh: 26vw; }
+    .card.hide { display: none; }
+  @media (max-width: 820px) { .card.xl, .card.wide { grid-column: 1 / -1; } .card.tall, .card.sq { grid-column: span 6; } .card .scene { flex: none; min-height: 0; aspect-ratio: var(--r, 4/3); } }
+  @media (max-width: 520px) { .card.tall, .card.sq { grid-column: 1 / -1; } }
+
+  .viewer { border: 0; background: var(--black); color: var(--warm); width: 100vw; max-width: 100vw; height: 100dvh; max-height: 100dvh; margin: 0; padding: 0; }
+  .viewer[open] { display: grid; grid-template-columns: 1.6fr 1fr; animation: vin .7s var(--ease); }
+  .viewer::backdrop { background: #000; }
+  @keyframes vin { from { clip-path: inset(100% 0 0 0); } to { clip-path: inset(0); } }
+  .v-scene { height: 100%; min-height: 30vh; }
+  .v-info { padding: 5rem var(--pad) 2rem; display: flex; flex-direction: column; gap: 1.2rem; justify-content: center; }
+  .v-info h3 { font-size: clamp(2.4rem, 5vw, 5rem); }
+  .close { position: absolute; top: 1.2rem; right: var(--pad); border: 1px solid var(--gold); padding: .5rem 1rem; z-index: 3; color: var(--warm); }
+  dl { display: flex; gap: 2.5rem; border-top: 1px solid var(--line); padding-top: 1rem; }
+  dt { color: var(--gold); } dd { margin-top: .2rem; }
+  .nav2 { display: flex; justify-content: space-between; margin-top: 1.5rem; }
+  .nav2 button:hover { color: var(--gold-lit); }
+  @media (max-width: 820px) { .viewer[open] { grid-template-columns: 1fr; grid-template-rows: 38dvh 1fr; overflow-y: auto; } .v-info { padding-top: 2rem; justify-content: flex-start; } }
+</style>

@@ -1,0 +1,14 @@
+---
+// Logo de SPACE en un solo color plano (el del sitio), usando el PNG original como máscara.
+// El tamaño se controla desde fuera con --lh (alto) y el color con --lc.
+import { getImage } from 'astro:assets';
+import logo from '../assets/space-logo.png';
+const img = await getImage({ src: logo, width: 700, format: 'webp' });
+const ratio = (logo.width / logo.height).toFixed(4);
+---
+<span class="logo-mark" role="img" aria-label="SPACE Producciones" style={`--r:${ratio};--logo:url(${img.src})`}></span>
+<style>
+  /* Base en dorado (copa y "PRODUCCIONES"); encima, la palabra SPACE en blanco recortada por zona. */
+  .logo-mark { position: relative; display: block; height: var(--lh, 3rem); aspect-ratio: var(--r); background: var(--lc, var(--gold)); -webkit-mask: var(--logo) center / contain no-repeat; mask: var(--logo) center / contain no-repeat; transition: background .3s; }
+  .logo-mark::after { content: ''; position: absolute; inset: 0; background: var(--lc2, var(--white)); -webkit-mask: var(--logo) center / contain no-repeat; mask: var(--logo) center / contain no-repeat; clip-path: inset(33% 12.4% 22% 26.2%); transition: background .3s; }
+</style>

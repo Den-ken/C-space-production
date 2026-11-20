@@ -1,0 +1,25 @@
+---
+import { platforms } from '../data/site';
+---
+<section class="band" aria-labelledby="plat-h">
+  <h2 id="plat-h" class="sr">Plataformas en las que transmitimos</h2>
+  <div class="marquee">
+    <ul class="run">{platforms.map((p) => <li>{p}</li>)}</ul>
+    <ul class="run dup" aria-hidden="true">{platforms.map((p) => <li>{p}</li>)}</ul>
+  </div>
+</section>
+<style>
+  .band { background: var(--gold); color: var(--black); border-block: 1px solid var(--black); overflow: hidden; }
+  .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  .marquee { display: flex; }
+  .run { display: flex; flex-shrink: 0; min-width: 100%; justify-content: space-around; align-items: center; list-style: none; padding: .9rem 0; animation: slide 32s linear infinite; }
+  .marquee:hover .run { animation-play-state: paused; }
+  li { font-family: var(--f-display); font-size: clamp(1.8rem, 4.4vw, 3.6rem); line-height: 1; text-transform: uppercase; white-space: nowrap; display: flex; align-items: center; gap: clamp(1.4rem, 4vw, 3.4rem); padding-inline: clamp(.8rem, 2vw, 1.6rem); }
+  li::after { content: '/'; font-family: var(--f-serif); font-style: italic; text-transform: none; font-size: .8em; opacity: .55; }
+  @keyframes slide { to { transform: translateX(-100%); } }
+  /* sin movimiento: lista fija y centrada, sin duplicado */
+  @media (prefers-reduced-motion: reduce) {
+    .run { animation: none; flex-wrap: wrap; justify-content: center; gap: .2rem 0; }
+    .dup { display: none; }
+  }
+</style>

@@ -1,0 +1,60 @@
+<section class="hero scene" id="top" data-tone="0" aria-label="Portada">
+  <div class="vf" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+  <div class="hud mono" aria-hidden="true">
+    <span><b class="rec"></b> EN VIVO</span><span class="tc">00:00:00</span><span>+18</span>
+  </div>
+  <img src={`${import.meta.env.BASE_URL}projects/p4.jpg`} alt="" width="1600" height="1067" fetchpriority="high" decoding="async" />
+  <p class="tag-temp">Foto de stock · sustituir por material propio</p>
+  <div class="msg">
+    <h1 class="claim" aria-label="Producimos lo que pasa en vivo.">
+      <span class="split-line"><span>Producimos lo</span></span>
+      <span class="split-line"><span>que pasa <em>en vivo.</em></span></span>
+    </h1>
+    <p class="sub" data-hero-fade>Podcasts, transmisiones y creadores en TikTok, YouTube, Twitch, Kick, Facebook e Instagram.</p>
+    <div class="ctas" data-hero-fade>
+      <a href="#contacto" class="btn solid">Hablemos <span class="arr">→</span></a>
+      <a href="#creadores" class="btn">Soy creador/a</a>
+    </div>
+  </div>
+  <div class="word" aria-hidden="true">
+    <div class="space"><span>S</span><span>P</span><span>A</span><span>C</span><span>E</span></div>
+    <div class="prod mono"><i></i><span>PRODUCCIONES</span><i></i></div>
+  </div>
+  <a href="#nosotros" class="scroll mono" data-hero-fade><span>Scroll</span><i></i></a>
+</section>
+<style>
+  .hero { min-height: 100svh; display: grid; grid-template-rows: 1fr auto; padding: 6rem var(--pad) 2.2rem; }
+  .hero::before { animation: drift 18s ease-in-out infinite alternate; }
+  @keyframes drift { to { transform: translate3d(-3%, 2%, 0) scale(1.08); } }
+  .hero::after { background-color: transparent; }
+  /* la foto de neón se tiñe de ámbar para quedar dentro de la paleta negro y dorado */
+  .hero > img { opacity: .5; object-position: 50% 40%; filter: sepia(1) saturate(1.5) hue-rotate(-8deg) contrast(1.05) brightness(.95); }
+  .vf i { position: absolute; width: 28px; height: 28px; border: 0 solid var(--gold); opacity: .8; }
+  .vf i:nth-child(1) { top: 5rem; left: var(--pad); border-width: 1px 0 0 1px; }
+  .vf i:nth-child(2) { top: 5rem; right: var(--pad); border-width: 1px 1px 0 0; }
+  .vf i:nth-child(3) { bottom: 1.4rem; left: var(--pad); border-width: 0 0 1px 1px; }
+  .vf i:nth-child(4) { bottom: 1.4rem; right: var(--pad); border-width: 0 1px 1px 0; }
+  .hud { position: absolute; top: 5.2rem; left: 50%; transform: translateX(-50%); display: flex; gap: 1.6rem; color: var(--warm); opacity: .85; }
+  .rec { display: inline-block; width: 8px; height: 8px; background: #e23b3b; border-radius: 50%; animation: blink 1.2s steps(2) infinite; margin-right: .3rem; }
+  @keyframes blink { 50% { opacity: 0; } }
+  .tag-temp { top: 8rem; bottom: auto; left: var(--pad); }
+  .msg { align-self: start; margin-top: 4.5rem; max-width: 60rem; position: relative; z-index: 2; }
+  .claim { font-size: clamp(2.1rem, 5.6vw, 5rem); line-height: 1; }
+  .claim em { font-size: 1.1em; }
+  .sub { margin-top: 1.4rem; max-width: 30rem; color: var(--warm); opacity: .9; font-size: 1.05rem; }
+  .ctas { display: flex; flex-wrap: wrap; gap: .8rem 1rem; margin-top: 1.8rem; }
+  .ctas .btn { padding: .95rem 1.5rem; }
+  .word { align-self: end; position: relative; z-index: 2; margin-top: 2rem; }
+  .space { display: flex; justify-content: space-between; font-family: var(--f-display); font-size: clamp(6rem, 30.5vw, 34rem); line-height: .8; color: var(--white); letter-spacing: -.01em; overflow: hidden; padding-top: .06em; }
+  .space span { display: inline-block; will-change: transform; }
+  .prod { display: flex; align-items: center; gap: 1.2rem; color: var(--gold); margin-top: 1.4rem; letter-spacing: .6em; font-size: clamp(.65rem, 1.6vw, 1.1rem); }
+  .prod i { flex: 1; height: 1px; background: var(--gold); transform-origin: left; }
+  /* arriba a la derecha, lejos del SPACE gigante */
+  .scroll { position: absolute; right: var(--pad); top: 9rem; display: flex; flex-direction: column; align-items: center; gap: .9rem; writing-mode: vertical-rl; color: var(--warm); }
+  .scroll i { width: 1px; height: 4rem; background: var(--line); position: relative; overflow: hidden; }
+  .scroll i::after { content: ''; position: absolute; inset: 0; background: var(--gold-lit); animation: sc 2s var(--ease) infinite; }
+  @keyframes sc { from { transform: translateY(-100%); } to { transform: translateY(100%); } }
+  @media (max-width: 700px) { .hud { display: none; } .scroll { display: none; } .tag-temp { top: 6.2rem; } .prod { letter-spacing: .3em; } .msg { margin-top: 4rem; } }
+  @media (max-height: 620px) { .scroll { display: none; } }
+  @media (prefers-reduced-motion: reduce) { .hero::before, .rec, .scroll i::after { animation: none; } }
+</style>

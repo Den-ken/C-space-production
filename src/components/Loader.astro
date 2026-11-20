@@ -1,0 +1,19 @@
+---
+import Logo from './Logo.astro';
+---
+<div class="loader" aria-hidden="true">
+  <div class="llogo"><Logo /></div>
+  <div class="count"><span id="lcount">000</span><small class="mono">%</small></div>
+  <p class="mono">SPACE PRODUCCIONES · Conectando señal</p>
+  <i class="bar"><b id="lbar"></b></i>
+</div>
+<style>
+  .loader { position: fixed; inset: 0; z-index: 300; background: var(--black); display: grid; place-content: center; text-align: center; gap: 1rem; }
+  .llogo { --lh: 5rem; display: flex; justify-content: center; margin-bottom: .5rem; }
+  .count { font-family: var(--f-display); font-size: clamp(5rem, 20vw, 14rem); line-height: 1; color: var(--white); }
+  .count small { color: var(--gold); font-size: 1rem; margin-left: .4rem; }
+  .loader p { color: var(--gold); }
+  .bar { display: block; height: 1px; background: var(--line); width: min(24rem, 70vw); margin: 0 auto; }
+  .bar b { display: block; height: 100%; width: 0; background: var(--gold-lit); }
+  html:not(.js) .loader { display: none; }
+</style>

@@ -1,0 +1,73 @@
+---
+import { contact } from '../data/site';
+const endpoint = import.meta.env.PUBLIC_FORM_ENDPOINT ?? '';
+const hasContact = Boolean(contact.email || contact.phone || contact.whatsapp || contact.social.length);
+---
+<section class="section contact" id="contacto" aria-labelledby="c-h">
+  <p class="label mono">Canal 04 — Contacto</p>
+  <h2 id="c-h" data-split>Pongamos tu idea <em>en vivo.</em></h2>
+  <div class="cols">
+    <form id="quote" novalidate data-endpoint={endpoint} aria-describedby="fstatus">
+      <div class="f"><label for="nombre">Nombre</label><input id="nombre" name="nombre" autocomplete="name" required /><small class="err" aria-live="polite"></small></div>
+      <div class="f"><label for="correo">Correo electrónico</label><input id="correo" name="correo" type="email" autocomplete="email" required /><small class="err" aria-live="polite"></small></div>
+      <div class="f"><label for="tel">Teléfono (opcional)</label><input id="tel" name="telefono" type="tel" autocomplete="tel" /></div>
+      <div class="f"><label for="canal">Tu canal o red principal (opcional)</label><input id="canal" name="canal" placeholder="@usuario o enlace" /></div>
+      <div class="f full"><label for="tipo">¿Qué te interesa?</label>
+        <select id="tipo" name="motivo" required>
+          <option value="">Selecciona una opción</option>
+          <option>Podcasts</option>
+          <option>Transmisiones en vivo</option>
+          <option>Shows y formatos nocturnos</option>
+          <option>Agencia de creadores</option>
+          <option>Casting</option>
+          <option>Sesiones fotográficas</option>
+          <option>Otro</option>
+        </select><small class="err" aria-live="polite"></small></div>
+      <div class="f full"><label for="idea">Cuéntanos tu idea</label><textarea id="idea" name="idea" rows="4" required></textarea><small class="err" aria-live="polite"></small></div>
+      <div class="f full chk">
+        <label class="ck" for="edad"><input id="edad" name="mayor_de_18" type="checkbox" required /><span>Confirmo que tengo 18 años o más.</span></label>
+        <small class="err" aria-live="polite"></small>
+      </div>
+      <div class="full"><button type="submit" class="btn solid">Enviar mensaje <span class="arr">→</span></button></div>
+      <p id="fstatus" class="status" role="status"></p>
+    </form>
+    <aside class="info mono">
+      <p class="gold">Datos de contacto</p>
+      {hasContact ? (
+        <dl>
+          {contact.email && <><dt>Correo</dt><dd><a href={`mailto:${contact.email}`}>{contact.email}</a></dd></>}
+          {contact.phone && <><dt>Teléfono</dt><dd><a href={`tel:${contact.phone.replace(/[^+\d]/g, '')}`}>{contact.phone}</a></dd></>}
+          {contact.social.length > 0 && <><dt>Redes sociales</dt><dd class="soc">{contact.social.map((s) => <a href={s.url} rel="noopener" target="_blank">{s.label}</a>)}</dd></>}
+        </dl>
+      ) : (
+        <p class="solo">Escríbenos en el formulario y te responderemos.</p>
+      )}
+    </aside>
+  </div>
+</section>
+<style>
+  .contact { background: var(--black); }
+  .contact h2 { font-size: clamp(2.8rem, 9.5vw, 11rem); max-width: 12ch; margin-bottom: 2.5rem; }
+  .cols { display: grid; grid-template-columns: 1.7fr 1fr; gap: 4rem; align-items: start; }
+  form { display: grid; grid-template-columns: 1fr 1fr; gap: 1.6rem 2rem; }
+  .full { grid-column: 1 / -1; }
+  .f { display: flex; flex-direction: column; gap: .4rem; }
+  label { font-family: var(--f-mono); font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; color: var(--gold); }
+  input, select, textarea { background: transparent; border: 0; border-bottom: 1px solid var(--line); color: var(--warm); font: inherit; font-size: 1.05rem; padding: .7rem 0; border-radius: 0; transition: border-color .3s; }
+  input::placeholder { color: var(--warm); opacity: .4; }
+  select option { background: var(--carbon); }
+  textarea { resize: vertical; }
+  input:focus, select:focus, textarea:focus { outline: none; border-color: var(--gold-lit); }
+  .f.bad input, .f.bad select, .f.bad textarea { border-color: #e0614f; }
+  .ck { display: flex; align-items: center; gap: .8rem; cursor: pointer; font-size: .8rem; color: var(--warm); }
+  .ck input { flex: none; width: 1.2rem; height: 1.2rem; padding: 0; border: 0; accent-color: var(--gold); }
+  .err { color: #ff8a78; font-size: .78rem; min-height: 1em; }
+  .status { grid-column: 1 / -1; font-size: .92rem; color: var(--gold-lit); }
+  .info dl { display: grid; gap: .3rem; margin-top: 1.2rem; border-top: 1px solid var(--line); padding-top: 1.2rem; }
+  .info dt { color: var(--gold); margin-top: .9rem; } .info dd { opacity: .75; text-transform: none; letter-spacing: .04em; }
+  .info dd a { text-decoration: underline; text-underline-offset: .25em; }
+  .info dd a:hover { color: var(--gold-lit); }
+  .soc { display: flex; flex-wrap: wrap; gap: .4rem 1.2rem; }
+  .solo { margin-top: 1.2rem; border-top: 1px solid var(--line); padding-top: 1.2rem; text-transform: none; letter-spacing: .04em; opacity: .75; line-height: 1.6; }
+  @media (max-width: 860px) { .cols { grid-template-columns: 1fr; } form { grid-template-columns: 1fr; } }
+</style>

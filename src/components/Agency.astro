@@ -1,0 +1,64 @@
+---
+import { paths } from '../data/site';
+---
+<section class="section ag" id="creadores" aria-labelledby="ag-h">
+  <div class="head">
+    <div>
+      <p class="label mono" data-reveal>Canal 03 — Creadores</p>
+      <h2 id="ag-h" data-split>Tu canal, <em>nuestra señal.</em></h2>
+    </div>
+    <div class="age" role="img" aria-label="Contenido solo para mayores de 18 años"><b>+18</b><span class="mono">Solo mayores<br />de edad</span></div>
+  </div>
+
+  <div class="cols">
+    <div class="lead" data-reveal>
+      <p>SPACE también es agencia de creadoras e influencers, con casting.</p>
+    </div>
+    <ul class="paths" data-reveal>
+      {paths.map((p) => (
+        <li>
+          <a class="path" href="#contacto" data-need={p.need}>
+            <span class="k mono">{p.k}</span>
+            <span class="t">{p.t}</span>
+            <span class="d">{p.d}</span>
+            <span class="go" aria-hidden="true">→</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+<style>
+  /* sección clara: rompe el fondo oscuro y marca el cambio de tema, de servicios a personas */
+  .ag { --deep: #8a6512; background: var(--warm); color: var(--black); }
+  .ag h2 { color: var(--black); font-size: clamp(2.8rem, 8vw, 8.5rem); max-width: 11ch; }
+  .ag em { color: var(--deep); font-size: 1.05em; }
+  .ag .label { color: var(--black); }
+  .ag .label::before { background: var(--black); }
+  .head { display: flex; justify-content: space-between; align-items: flex-end; gap: 2rem; flex-wrap: wrap; margin-bottom: clamp(2rem, 4vw, 3.5rem); }
+  .age { display: flex; align-items: center; gap: 1rem; }
+  .age b { display: grid; place-items: center; width: clamp(4.4rem, 7vw, 6rem); aspect-ratio: 1; border: 2px solid var(--black); border-radius: 50%; font-family: var(--f-display); font-weight: 400; font-size: clamp(1.7rem, 2.8vw, 2.4rem); line-height: 1; }
+  .age span { line-height: 1.5; }
+  .cols { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(2rem, 6vw, 6rem); align-items: start; }
+  .lead { display: grid; gap: 1.2rem; font-size: 1.1rem; line-height: 1.65; max-width: 30rem; }
+  .lead .mono { color: var(--deep); }
+  .paths { list-style: none; border-top: 2px solid var(--black); }
+  .path { position: relative; display: grid; grid-template-columns: 3rem minmax(0, 1.1fr) minmax(0, 1fr) auto; gap: .4rem 1.2rem; align-items: center; padding: 1.5rem .8rem; border-bottom: 1px solid rgba(8, 8, 8, .25); isolation: isolate; transition: color .35s; }
+  .path::before { content: ''; position: absolute; inset: 0; background: var(--black); transform: scaleY(0); transform-origin: bottom; transition: transform .5s var(--ease); z-index: -1; }
+  .path:hover, .path:focus-visible { color: var(--warm); }
+  .path:hover::before, .path:focus-visible::before { transform: none; }
+  .k { color: var(--deep); transition: color .35s; }
+  .path:hover .k, .path:focus-visible .k { color: var(--gold-lit); }
+  .t { font-family: var(--f-display); font-size: clamp(1.5rem, 2.6vw, 2.3rem); line-height: 1; text-transform: uppercase; }
+  .d { font-size: .95rem; line-height: 1.45; }
+  .go { font-size: 1.6rem; transition: transform .4s var(--ease); }
+  .path:hover .go, .path:focus-visible .go { transform: translateX(6px); }
+  .path:focus-visible { outline-color: var(--black); }
+  @media (max-width: 860px) {
+    .cols { grid-template-columns: 1fr; }
+    .path { grid-template-columns: 2.4rem 1fr auto; }
+    .d { grid-column: 2; grid-row: 2; }
+    .go { grid-column: 3; grid-row: 1 / span 2; }
+  }
+  @media (hover: none) { .path::before { display: none; } .path:hover { color: inherit; } .path:hover .k { color: var(--deep); } }
+</style>

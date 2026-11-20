@@ -1,0 +1,42 @@
+---
+import { process } from '../data/site';
+---
+<section class="section proc" id="proceso" aria-labelledby="proc-h">
+  <p class="label mono dark">Canal 04 — Cómo salimos al aire</p>
+  <h2 id="proc-h" data-split>De la idea al <em>en vivo</em></h2>
+
+  <div class="tl">
+    <div class="ruler mono" aria-hidden="true"><span>00:00</span><span>01:00</span><span>02:00</span><span>03:00</span><span>04:00</span></div>
+    <div class="playhead" aria-hidden="true"><i></i></div>
+    {process.map((p, i) => (
+      <div class="track" style={`--i:${i}`}>
+        <div class="tname mono"><b>P{i + 1}</b></div>
+        <div class="lane">
+          <div class="clip" data-clip>
+            <h3>{p.t}</h3>
+          </div>
+          <p class="desc">{p.d}</p>
+        </div>
+      </div>
+    ))}
+  </div>
+</section>
+<style>
+  .proc { background: var(--mustard); color: var(--black); overflow: hidden; }
+  .proc h2 { font-size: clamp(2.4rem, 7vw, 7.5rem); color: var(--black); max-width: 14ch; }
+  .proc em { color: var(--black); }
+  .dark { color: var(--black); } .dark::before { background: var(--black); }
+  .tl { position: relative; margin-top: 4rem; }
+  .ruler { display: flex; justify-content: space-between; border-bottom: 1px solid rgba(8,8,8,.5); padding: 0 0 .6rem 7rem; margin-bottom: .5rem; font-size: .65rem; }
+  .track { display: grid; grid-template-columns: 7rem 1fr; align-items: start; border-bottom: 1px solid rgba(8,8,8,.18); padding: 1rem 0; }
+  .tname { padding-top: .8rem; } .tname b { color: var(--black); background: var(--black); color: var(--mustard); padding: .1rem .4rem; margin-right: .4rem; }
+  .lane { padding-left: calc(var(--i) * 12%); }
+  .clip { background: var(--black); color: var(--warm); padding: .9rem 1.2rem; width: max-content; max-width: 100%; opacity: .35; transform-origin: left; transition: opacity .5s, background .4s; border-left: 3px solid var(--gold-lit); }
+  .clip h3 { font-size: clamp(1.1rem, 2.4vw, 2rem); color: var(--warm); }
+  .clip.on { opacity: 1; }
+  .desc { max-width: 28rem; margin-top: .6rem; font-size: .92rem; line-height: 1.5; }
+  .playhead { position: absolute; top: 0; bottom: 0; left: 7rem; width: 0; z-index: 3; pointer-events: none; }
+  .playhead i { position: absolute; top: 0; bottom: 0; left: -1px; width: 2px; background: var(--black); }
+  .playhead i::before { content: ''; position: absolute; top: 0; left: -6px; border: 7px solid transparent; border-top-color: var(--black); border-bottom: 0; }
+  @media (max-width: 760px) { .track { grid-template-columns: 1fr; gap: .4rem; } .lane { padding-left: 0; } .ruler, .playhead { display: none; } .clip { opacity: 1; } }
+</style>

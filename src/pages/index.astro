@@ -1,0 +1,25 @@
+---
+import Base from '../layouts/Base.astro';
+import Loader from '../components/Loader.astro';
+import Nav from '../components/Nav.astro';
+import Hero from '../components/Hero.astro';
+import About from '../components/About.astro';
+import Services from '../components/Services.astro';
+import Platforms from '../components/Platforms.astro';
+import Agency from '../components/Agency.astro';
+import Contact from '../components/Contact.astro';
+import Footer from '../components/Footer.astro';
+---
+<Base title="SPACE PRODUCCIONES — Podcasts, directos y creadores" description="Productora digital de entretenimiento: podcasts, transmisiones en vivo en TikTok, Facebook, YouTube, Instagram, Kick y Twitch, shows y formatos nocturnos, y agencia de creadores con casting. Acceso solo para mayores de 18.">
+  <Loader />
+  <Nav />
+  <main id="main">
+    <Hero />
+    <Platforms />
+    <About />
+    <Services />
+    <Agency />
+    <Contact />
+  </main>
+  <Footer />
+</Base>

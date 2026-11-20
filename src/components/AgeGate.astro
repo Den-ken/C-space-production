@@ -1,0 +1,20 @@
+<dialog class="gate" aria-labelledby="gate-h" aria-describedby="gate-d">
+  <div class="age" aria-hidden="true">+18</div>
+  <h2 id="gate-h">Acceso solo para mayores de 18</h2>
+  <p id="gate-d">El acceso a este sitio es solo para mayores de 18 años. Confirma tu edad para continuar.</p>
+  <div class="acts">
+    <button type="button" class="btn solid" data-gate="yes">Tengo 18 años o más <span class="arr">→</span></button>
+    <button type="button" class="btn" data-gate="no">Salir</button>
+  </div>
+</dialog>
+<style>
+  .gate { border: 1px solid var(--gold); background: var(--black); color: var(--warm); width: min(34rem, calc(100vw - 2rem)); margin: auto; padding: clamp(1.6rem, 4vw, 2.6rem); text-align: center; }
+  .gate::backdrop { background: rgba(8, 8, 8, .92); backdrop-filter: blur(6px); }
+  .gate[open] { display: grid; justify-items: center; gap: 1rem; animation: gin .6s var(--ease); }
+  @keyframes gin { from { opacity: 0; transform: translateY(20px); } }
+  .age { display: grid; place-items: center; width: 5.4rem; aspect-ratio: 1; border: 2px solid var(--gold); border-radius: 50%; color: var(--gold-lit); font-family: var(--f-display); font-size: 2.2rem; line-height: 1; }
+  .gate h2 { font-size: clamp(1.9rem, 5vw, 2.8rem); text-wrap: balance; }
+  .gate p { max-width: 26rem; opacity: .85; line-height: 1.6; }
+  .acts { display: flex; flex-wrap: wrap; justify-content: center; gap: .8rem; margin-top: .6rem; }
+  @media (prefers-reduced-motion: reduce) { .gate[open] { animation: none; } }
+</style>
